@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. W.J. Kamau | Consultant Gynecologist & Laparoscopic Surgeon</title>
-    <meta name="description" content="Dr. W.J. Kamau specializes in Laparoscopy, Hysteroscopy, Antenatal care, and Gynecologic surgeries in Nairobi.">
+    <title>Dr. W.J. Kamau | Surgical Artistry & Gynecology</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -21,25 +20,19 @@
                 extend: {
                     colors: {
                         brand: {
-                            dark: '#051923',
-                            primary: '#0F4C5C',
-                            accent: '#E07A5F',
-                            cream: '#F4F1DE',
-                            gold: '#D4AF37'
+                            dark: '#050f14',    /* Deepest Midnight */
+                            slate: '#1A2A33',   /* Softened Navy */
+                            accent: '#D4AF37',  /* Metallic Gold */
+                            paper: '#F2F0E9',   /* Natural White */
+                            muted: '#8E9491'    /* Stone Grey */
                         }
                     },
                     fontFamily: {
                         sans: ['Manrope', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
                     },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
+                    backgroundImage: {
+                        'grain': "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%\" height=\"100%\" filter=\"url(%23noiseFilter)\" opacity=\"0.05\"/%3E%3C/svg%3E')"
                     }
                 }
             }
@@ -47,445 +40,305 @@
     </script>
 
     <style>
-        body {
-            background-color: #F4F1DE;
-            color: #051923;
+        /* Strict Overflow Control */
+        html, body {
+            width: 100%;
             overflow-x: hidden;
+            background-color: #F2F0E9;
+            color: #050f14;
         }
 
+        /* Cinematic Grain Overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+        }
+
+        /* Preloader */
         #loader-wrapper {
             position: fixed;
             inset: 0;
-            background: #051923;
+            background: #050f14;
             z-index: 10000;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-        }
-        
-        .parallax-img-wrapper {
-            overflow: hidden;
-            border-radius: 1.5rem;
-        }
-        .parallax-img {
-            will-change: transform;
-            transform: scale(1.2);
         }
 
+        /* Glass Navigation */
         .glass-nav {
-            background: rgba(244, 241, 222, 0.85);
+            background: rgba(242, 240, 233, 0.05);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(15, 76, 92, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.5s ease, padding 0.5s ease;
         }
-
-        .service-card {
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        .glass-nav.scrolled {
+            background: rgba(242, 240, 233, 0.85);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(5, 15, 20, 0.05);
         }
-        .service-card:hover {
-            transform: translateY(-10px);
-            background: #fff;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        }
-
-        .float-btn {
-            position: fixed;
-            z-index: 90;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .float-btn:hover { transform: scale(1.1); }
         
-        #backToTop {
-            bottom: 30px;
-            right: 30px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-        }
-        #backToTop.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
+        /* Text Reveal Handling */
+        .reveal-overflow { overflow: hidden; }
+        .reveal-text { transform: translateY(100%); opacity: 0; }
 
-        .creator-tag {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
+        /* Mobile Menu */
+        .full-menu {
+            position: fixed;
+            inset: 0;
+            background: #050f14;
+            z-index: 5000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.8s cubic-bezier(0.77,0,0.18,1);
         }
-        .creator-tag::after {
-            content: '</>';
-            position: absolute;
-            right: -25px;
-            top: 0;
-            opacity: 0;
-            color: #E07A5F;
-            transition: 0.3s;
-            font-family: monospace;
+        .full-menu.open { transform: translateY(0); }
+        
+        .menu-link {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            transition: color 0.3s;
+            line-height: 1.5;
         }
-        .creator-tag:hover::after { opacity: 1; right: -30px; }
-        .creator-tag:hover { color: #E07A5F; }
+        .menu-link:hover, .menu-link.active { color: #D4AF37; }
 
-        .mobile-panel {
-            transform: translateX(100%);
-            transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
-        }
-        .mobile-panel.open { transform: translateX(0); }
+        /* Floating Element Hover */
+        .hover-float:hover { transform: translateY(-5px); }
 
-        .nav-link.active {
-            color: #0F4C5C;
-            position: relative;
-        }
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #0F4C5C;
-            transition: width 0.3s;
-        }
-        .mobile-link.active {
-            color: #E07A5F;
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .service-card.md\:-translate-y-8 {
-                transform: translateY(0) !important;
-            }
-            .hero-text .text-5xl {
-                font-size: 2.5rem;
-            }
-            .process-timeline {
-                padding-left: 1rem;
-            }
+        /* Input Autofill Fix */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px white inset !important;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-brand-accent selection:text-brand-dark">
 
     <div id="loader-wrapper">
-        <div class="relative w-24 h-24">
-            <svg class="w-full h-full animate-spin text-brand-primary opacity-20" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <div class="absolute inset-0 flex items-center justify-center">
-                <svg class="w-8 h-8 text-brand-accent animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg>
+        <div class="text-center relative z-10">
+            <div class="overflow-hidden mb-4">
+                <h1 class="text-brand-accent font-serif text-4xl italic tracking-wider" id="loader-text">W.J. Kamau</h1>
             </div>
+            <div class="w-64 h-[1px] bg-white/10 mx-auto relative overflow-hidden">
+                <div id="loader-bar" class="absolute inset-y-0 left-0 bg-brand-accent w-0"></div>
+            </div>
+            <p class="text-white/40 text-[9px] uppercase tracking-[0.4em] mt-4">Surgical Excellence</p>
         </div>
-        <p class="mt-8 text-brand-cream font-serif text-lg tracking-[0.3em] uppercase animate-pulse">Dr. W.J. Kamau</p>
     </div>
 
-    <!-- WhatsApp with updated clinic number (0726958498 → 254726958498) -->
-    <a href="https://wa.me/254726958498" target="_blank" class="float-btn bottom-8 left-8 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white" title="Chat on WhatsApp">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    <div class="full-menu" id="fullMenu">
+        <button id="closeMenu" class="absolute top-8 right-8 text-white/50 hover:text-brand-accent transition-colors">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <nav class="flex flex-col items-center gap-6">
+            <a href="#home" class="menu-link" onclick="closeMenu()">Home</a>
+            <a href="#about" class="menu-link" onclick="closeMenu()">Vision</a>
+            <a href="#services" class="menu-link" onclick="closeMenu()">Expertise</a>
+            <a href="#contact" class="menu-link" onclick="closeMenu()">Contact</a>
+        </nav>
+    </div>
+
+    <a href="https://wa.me/254726958498" target="_blank" class="fixed bottom-8 left-8 z-40 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 group">
+        <div class="absolute inset-0 rounded-full border border-white/20 animate-ping opacity-20"></div>
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
     </a>
-    
-    <button id="backToTop" class="float-btn w-12 h-12 bg-brand-dark text-white rounded-full flex items-center justify-center border border-white/10">
+
+    <button id="backToTop" class="fixed bottom-8 right-8 z-40 w-12 h-12 bg-brand-dark text-white rounded-full flex items-center justify-center opacity-0 pointer-events-none transform translate-y-4 transition-all duration-500 hover:bg-brand-accent hover:text-brand-dark">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
     </button>
 
-    <div id="mobileMenu" class="mobile-panel fixed inset-y-0 right-0 w-[85%] max-w-sm bg-brand-dark z-50 p-8 shadow-2xl flex flex-col">
-        <div class="flex justify-between items-center mb-12">
-            <span class="text-white font-serif text-xl">Menu</span>
-            <button class="close-menu text-brand-accent text-4xl">&times;</button>
-        </div>
-        <nav class="flex flex-col space-y-8 text-2xl font-serif text-white">
-            <a href="#home" class="mobile-link hover:text-brand-accent transition">Home</a>
-            <a href="#about" class="mobile-link hover:text-brand-accent transition">Philosophy</a>
-            <a href="#services" class="mobile-link hover:text-brand-accent transition">Expertise</a>
-            <a href="#process" class="mobile-link hover:text-brand-accent transition">Your Journey</a>
-            <a href="#contact" class="mobile-link hover:text-brand-accent transition">Contact</a>
-        </nav>
-    </div>
-    <div id="menuOverlay" class="fixed inset-0 bg-black/50 z-40 hidden backdrop-blur-sm"></div>
-
-    <nav class="fixed w-full z-40 glass-nav transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-9 h-9 bg-brand-primary text-brand-cream rounded-full flex items-center justify-center transition-transform group-hover:rotate-12">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+    <nav class="fixed top-0 left-0 w-full z-50 glass-nav" id="navbar">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12 h-24 flex justify-between items-center">
+            <a href="#" class="group flex items-center gap-4 z-50">
+                <div class="w-10 h-10 border border-current rounded-full flex items-center justify-center transition-colors duration-500 text-brand-accent group-hover:bg-brand-accent group-hover:text-brand-dark">
+                    <span class="font-serif text-lg leading-none pt-1">K</span>
                 </div>
-                <div class="leading-tight">
-                    <span class="block font-serif text-lg font-bold text-brand-dark">Dr. W.J. Kamau</span>
-                    <span class="block text-[9px] tracking-[0.2em] uppercase text-brand-primary">Gynecologist</span>
+                <div class="leading-tight transition-colors duration-500 text-white" id="nav-text">
+                    <span class="block font-serif text-lg tracking-wide">W.J. Kamau</span>
+                    <span class="text-[9px] tracking-[0.3em] uppercase opacity-70">Specialist Surgery</span>
                 </div>
             </a>
             
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#home" class="nav-link text-xs font-bold uppercase tracking-widest hover:text-brand-primary transition">Home</a>
-                <a href="#about" class="nav-link text-xs font-bold uppercase tracking-widest hover:text-brand-primary transition">About</a>
-                <a href="#services" class="nav-link text-xs font-bold uppercase tracking-widest hover:text-brand-primary transition">Services</a>
-                <a href="#process" class="nav-link text-xs font-bold uppercase tracking-widest hover:text-brand-primary transition">Process</a>
-                <a href="#contact" class="nav-link text-xs font-bold uppercase tracking-widest hover:text-brand-primary transition">Contact</a>
-                <a href="#contact" class="px-6 py-2.5 bg-brand-dark text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-brand-accent transition-all hover:shadow-lg hover:shadow-brand-accent/30">Book Consultation</a>
+            <div class="hidden md:flex items-center gap-10">
+                <a href="#home" class="text-[10px] font-bold uppercase tracking-[0.2em] text-white hover:text-brand-accent transition-colors nav-item">Home</a>
+                <a href="#about" class="text-[10px] font-bold uppercase tracking-[0.2em] text-white hover:text-brand-accent transition-colors nav-item">Vision</a>
+                <a href="#services" class="text-[10px] font-bold uppercase tracking-[0.2em] text-white hover:text-brand-accent transition-colors nav-item">Expertise</a>
+                <a href="#contact" class="px-6 py-3 border border-brand-accent text-brand-accent text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-brand-accent hover:text-brand-dark transition-all duration-500">Book Session</a>
             </div>
 
-            <button class="md:hidden text-brand-dark open-menu">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <button class="md:hidden text-white z-50" id="openMenu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8h16M4 16h16"/></svg>
             </button>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section id="home" class="relative min-h-screen pt-20 pb-12 flex items-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.pexels.com/photos/4269361/pexels-photo-4269361.jpeg" 
-                 alt="Medical clinic interior" 
-                 class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-white/40"></div>
-            <div class="absolute top-0 right-[-10%] w-[50%] h-[80%] bg-gradient-to-b from-brand-primary/20 to-transparent rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-0 left-[-10%] w-[40%] h-[60%] bg-brand-accent/20 rounded-full blur-[80px]"></div>
+    <section id="home" class="relative w-full h-screen overflow-hidden flex items-center justify-center">
+        <div class="absolute inset-0 w-full h-full z-0 select-none">
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/80 via-brand-dark/40 to-brand-dark/90 z-10"></div>
+            <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Surgical Excellence" 
+                 class="w-full h-full object-cover transform scale-110" 
+                 id="hero-img">
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="hero-text">
-                    <h1 class="gsap-fade-up text-5xl lg:text-7xl font-serif text-brand-dark leading-[1.1] mb-8">
-                        The science of life.<br>
-                        <span class="italic text-brand-primary">The art of care.</span>
-                    </h1>
-                    <p class="gsap-fade-up text-lg text-gray-800 max-w-md leading-relaxed mb-10">
-                        Dr. W.J. Kamau is a Consultant Gynecologist specializing in <strong>Laparoscopy & Hysteroscopy</strong>, Antenatal care, and Gynecologic surgeries. Your journey to health begins with a conversation.
-                    </p>
-                    <div class="gsap-fade-up flex flex-wrap gap-4">
-                        <a href="#contact" class="group relative px-8 py-4 bg-brand-primary text-white rounded-full overflow-hidden shadow-xl">
-                            <span class="relative z-10 font-bold tracking-wider text-xs uppercase">Start Conversation</span>
-                            <div class="absolute inset-0 bg-brand-dark transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                        </a>
-                        <a href="#services" class="px-8 py-4 border border-brand-dark/30 bg-white/70 backdrop-blur-sm text-brand-dark rounded-full font-bold tracking-wider text-xs uppercase hover:bg-white transition-colors">
-                            Explore Services
-                        </a>
-                    </div>
+        <div class="relative z-20 text-center max-w-4xl px-6 pt-20">
+            <div class="reveal-overflow mb-6">
+                <span class="hero-text block text-brand-accent text-xs md:text-sm font-bold tracking-[0.5em] uppercase">Precision • Compassion • Results</span>
+            </div>
+            
+            <div class="reveal-overflow mb-8">
+                <h1 class="hero-text text-5xl md:text-7xl lg:text-8xl font-serif text-brand-paper leading-[1.1] tracking-tight">
+                    Redefining <br />
+                    <span class="italic font-light text-brand-muted opacity-80">Gynaecologic</span> Artistry
+                </h1>
+            </div>
+
+            <div class="reveal-overflow mb-12 flex justify-center">
+                <p class="hero-text text-brand-paper/70 text-base md:text-lg max-w-lg leading-relaxed font-light">
+                    Blending twenty-five years of clinical mastery with a bespoke approach to Laparoscopic Surgery and high-risk antenatal care.
+                </p>
+            </div>
+
+            <div class="hero-text flex flex-col md:flex-row gap-6 justify-center items-center">
+                <a href="#contact" class="px-8 py-4 bg-brand-accent text-brand-dark text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors duration-300 min-w-[200px]">
+                    Start Consultation
+                </a>
+                <a href="#services" class="group flex items-center gap-3 text-brand-paper/80 hover:text-brand-accent transition-colors text-xs font-bold uppercase tracking-[0.2em] cursor-pointer">
+                    <span>Explore Services</span>
+                    <svg class="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 md:py-32 bg-brand-paper text-brand-dark relative z-10">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <div class="order-2 lg:order-1">
+                    <span class="block text-brand-accent text-[10px] font-bold tracking-[0.4em] uppercase mb-8 gs-reveal">The Philosophy</span>
+                    <h2 class="text-3xl md:text-5xl font-serif leading-tight mb-8 gs-reveal">
+                        "True surgical excellence is the quiet marriage of technology and <span class="italic text-brand-slate">human intuition</span>."
+                    </h2>
+                    <div class="w-full h-[1px] bg-brand-dark/10 mb-10 gs-reveal"></div>
                     
-                    <div class="gsap-fade-up mt-16 pt-8 border-t border-brand-dark/20 flex gap-12">
-                        <div>
-                            <span class="block text-4xl font-serif text-brand-dark">25+</span>
-                            <span class="text-[10px] uppercase tracking-widest text-gray-700">Years Experience</span>
+                    <div class="grid sm:grid-cols-2 gap-10">
+                        <div class="gs-reveal">
+                            <h4 class="font-serif text-xl italic mb-3 text-brand-dark">Precision</h4>
+                            <p class="text-brand-muted text-sm leading-relaxed">Pioneering minimally invasive Laparoscopy and Hysteroscopy to ensure your recovery is as seamless as the procedure itself.</p>
                         </div>
-                        <div>
-                            <span class="block text-4xl font-serif text-brand-dark">1000+</span>
-                            <span class="text-[10px] uppercase tracking-widest text-gray-700">Surgeries</span>
+                        <div class="gs-reveal">
+                            <h4 class="font-serif text-xl italic mb-3 text-brand-dark">Presence</h4>
+                            <p class="text-brand-muted text-sm leading-relaxed">Beyond the theatre, we provide a sanctuary of clarity for high-risk obstetrics and complex antenatal journeys.</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="relative h-[600px] hidden lg:block">
-                    <div class="parallax-img-wrapper h-full w-full shadow-2xl relative z-10">
-                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1964&auto=format&fit=crop" 
-                             alt="Dr. W.J. Kamau" 
-                             class="parallax-img w-full h-full object-cover" 
-                             data-speed="0.5"> 
+                
+                <div class="order-1 lg:order-2 relative group">
+                    <div class="absolute inset-0 bg-brand-accent/0 group-hover:bg-brand-accent/5 transition-colors duration-500 z-10"></div>
+                    <div class="aspect-[3/4] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop" 
+                             alt="Doctor Profile" 
+                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 transform group-hover:scale-105">
                     </div>
-                    
-                    <div class="absolute bottom-12 -left-12 z-20 bg-white p-6 rounded-xl shadow-xl max-w-xs animate-float">
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Patient Review</span>
-                        </div>
-                        <p class="font-serif italic text-brand-dark">"Exceptional skill and compassionate care. I felt completely at ease."</p>
+                    <div class="absolute -bottom-6 -left-6 bg-brand-dark p-8 hidden md:block">
+                        <span class="block text-brand-accent text-4xl font-serif italic">25+</span>
+                        <span class="block text-white/50 text-[9px] uppercase tracking-widest mt-1">Years Experience</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="py-32 bg-brand-dark text-brand-cream relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-            <div class="grid lg:grid-cols-12 gap-16">
-                <div class="lg:col-span-5">
-                    <span class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em] mb-4 block reveal-text">Our Philosophy</span>
-                    <h2 class="text-4xl lg:text-5xl font-serif leading-tight mb-8 reveal-text">Medicine without<br>barriers.</h2>
-                    <div class="w-20 h-1 bg-brand-accent reveal-line"></div>
-                </div>
-                <div class="lg:col-span-7 space-y-8 text-lg font-light leading-relaxed text-gray-300">
-                    <p class="reveal-text">
-                        In a world of hurried appointments and complex medical jargon, Dr. W.J. Kamau offers a sanctuary of clarity. He is best known for his expertise in <strong>Laparoscopy and Hysteroscopy</strong>—procedures he performs with exceptional precision.
-                    </p>
-                    <p class="reveal-text">
-                        We specialize in <strong>High-Risk Obstetrics</strong>, <strong>Advanced Laparoscopy</strong>, <strong>Hysteroscopy</strong>, and comprehensive Gynecologic surgeries. Every procedure, from minimally invasive surgery to antenatal care, is performed with the utmost dignity and precision.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICES SECTION -->
-    <section id="services" class="py-32 bg-brand-cream">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="text-center mb-20">
-                <span class="text-brand-primary text-xs font-bold uppercase tracking-[0.2em]">Clinical Excellence</span>
-                <h2 class="text-4xl font-serif text-brand-dark mt-4">Areas of Expertise</h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1: Laparoscopy & Hysteroscopy -->
-                <div class="service-card group bg-white p-10 rounded-3xl border border-gray-100">
-                    <div class="w-16 h-16 bg-brand-primary/5 rounded-full flex items-center justify-center mb-8 text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-                    </div>
-                    <h3 class="text-2xl font-serif text-brand-dark mb-4">Laparoscopy & Hysteroscopy</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Minimally invasive surgery for fibroids, endometriosis, ovarian cysts, and diagnostic hysteroscopy. Faster recovery, exceptional precision.</p>
-                    <a href="#contact" class="text-brand-accent text-xs font-bold uppercase tracking-widest group-hover:translate-x-2 transition-transform inline-block">Learn More →</a>
-                </div>
-
-                <!-- Card 2: Gynecologic Surgery -->
-                <div class="service-card group bg-white p-10 rounded-3xl border border-gray-100 md:-translate-y-8">
-                    <div class="w-16 h-16 bg-brand-primary/5 rounded-full flex items-center justify-center mb-8 text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <h3 class="text-2xl font-serif text-brand-dark mb-4">Gynecologic Surgeries</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Comprehensive surgical care for fibroids, ovarian cysts, endometriosis, and other gynecological conditions with patient-centered approach.</p>
-                    <a href="#contact" class="text-brand-accent text-xs font-bold uppercase tracking-widest group-hover:translate-x-2 transition-transform inline-block">View Procedures →</a>
-                </div>
-
-                <!-- Card 3: Obstetrics & Antenatal Care -->
-                <div class="service-card group bg-white p-10 rounded-3xl border border-gray-100">
-                    <div class="w-16 h-16 bg-brand-primary/5 rounded-full flex items-center justify-center mb-8 text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <h3 class="text-2xl font-serif text-brand-dark mb-4">Obstetrics & Antenatal Care</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Full antenatal care, high-risk pregnancy management, and skilled delivery support for mother and baby.</p>
-                    <a href="#contact" class="text-brand-accent text-xs font-bold uppercase tracking-widest group-hover:translate-x-2 transition-transform inline-block">Book Appointment →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROCESS SECTION -->
-    <section id="process" class="py-32 bg-white relative">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div class="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1780&auto=format&fit=crop" class="parallax-img w-full h-full object-cover" data-speed="0.8" alt="Medical process">
-                </div>
+    <section id="services" class="py-24 bg-brand-dark text-white relative z-10">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 border-b border-white/10 pb-8">
                 <div>
-                    <span class="text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Your Journey</span>
-                    <h2 class="text-4xl font-serif text-brand-dark mb-12">The Pathway to Health</h2>
-                    
-                    <div class="space-y-10 relative pl-8 border-l border-gray-200 process-timeline">
-                        <div class="relative pl-8 reveal-text">
-                            <span class="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-brand-primary border-4 border-white shadow-md"></span>
-                            <h4 class="text-xl font-bold text-brand-dark mb-2">01. Consultation</h4>
-                            <p class="text-gray-600">An in-depth, 45-minute discussion to understand your medical history and concerns.</p>
-                        </div>
-                        <div class="relative pl-8 reveal-text">
-                            <span class="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-brand-accent border-4 border-white shadow-md"></span>
-                            <h4 class="text-xl font-bold text-brand-dark mb-2">02. Diagnostics</h4>
-                            <p class="text-gray-600">Advanced assessments to find the root cause (ultrasound coming soon).</p>
-                        </div>
-                        <div class="relative pl-8 reveal-text">
-                            <span class="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-brand-dark border-4 border-white shadow-md"></span>
-                            <h4 class="text-xl font-bold text-brand-dark mb-2">03. Treatment</h4>
-                            <p class="text-gray-600">A personalized plan—whether it's medication, minimally invasive surgery, or antenatal care.</p>
-                        </div>
-                        <div class="relative pl-8 reveal-text">
-                            <span class="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-brand-gold border-4 border-white shadow-md"></span>
-                            <h4 class="text-xl font-bold text-brand-dark mb-2">04. Aftercare</h4>
-                            <p class="text-gray-600">Continuous monitoring and support. You are never left to figure it out alone.</p>
-                        </div>
-                    </div>
+                    <h3 class="text-4xl md:text-6xl font-serif tracking-tight mb-2">Clinical <span class="italic text-brand-accent">Focus</span></h3>
+                </div>
+                <p class="text-white/40 text-[10px] uppercase tracking-[0.3em] font-bold mt-4 md:mt-0">Areas of Specialization</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-px bg-white/10 border border-white/10">
+                <div class="bg-[#081218] p-10 group hover:bg-brand-accent transition-colors duration-500 relative overflow-hidden">
+                    <span class="text-white/20 font-serif text-5xl italic block mb-16 group-hover:text-brand-dark/20 transition-colors">01.</span>
+                    <h4 class="text-2xl font-serif mb-4 group-hover:text-brand-dark transition-colors">Laparoscopy</h4>
+                    <p class="text-white/50 text-sm leading-relaxed mb-8 group-hover:text-brand-dark/70 transition-colors">Advanced keyhole surgery for Endometriosis, Myomectomy, and complex cyst removals with minimal downtime.</p>
+                </div>
+
+                <div class="bg-[#081218] p-10 group hover:bg-brand-accent transition-colors duration-500 relative overflow-hidden">
+                    <span class="text-white/20 font-serif text-5xl italic block mb-16 group-hover:text-brand-dark/20 transition-colors">02.</span>
+                    <h4 class="text-2xl font-serif mb-4 group-hover:text-brand-dark transition-colors">Obstetrics</h4>
+                    <p class="text-white/50 text-sm leading-relaxed mb-8 group-hover:text-brand-dark/70 transition-colors">Holistic antenatal care and skilled delivery services for both low and high-risk pregnancy pathways.</p>
+                </div>
+
+                <div class="bg-[#081218] p-10 group hover:bg-brand-accent transition-colors duration-500 relative overflow-hidden">
+                    <span class="text-white/20 font-serif text-5xl italic block mb-16 group-hover:text-brand-dark/20 transition-colors">03.</span>
+                    <h4 class="text-2xl font-serif mb-4 group-hover:text-brand-dark transition-colors">Hysteroscopy</h4>
+                    <p class="text-white/50 text-sm leading-relaxed mb-8 group-hover:text-brand-dark/70 transition-colors">Precision diagnostic and operative hysteroscopy to address uterine health with maximum clarity.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ SECTION -->
-    <section class="py-24 bg-brand-cream border-t border-brand-dark/5">
-        <div class="max-w-3xl mx-auto px-6">
-            <h2 class="text-3xl font-serif text-center mb-12">Common Questions</h2>
-            <div class="space-y-4">
-                <details class="group bg-white rounded-2xl p-6 cursor-pointer shadow-sm open:shadow-md transition-all">
-                    <summary class="flex justify-between items-center font-bold text-brand-dark list-none">
-                        Do you accept insurance?
-                        <span class="transition group-open:rotate-180">
-                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <p class="text-gray-600 mt-4 text-sm leading-relaxed">Yes, we partner with most major insurance providers including Jubilee, AAR, UAP, and CIC. Please bring your card for verification.</p>
-                </details>
-                <details class="group bg-white rounded-2xl p-6 cursor-pointer shadow-sm open:shadow-md transition-all">
-                    <summary class="flex justify-between items-center font-bold text-brand-dark list-none">
-                        What is recovery time for laparoscopy?
-                        <span class="transition group-open:rotate-180">
-                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <p class="text-gray-600 mt-4 text-sm leading-relaxed">Most patients are discharged within 24 hours and resume light activities within a few days. Full recovery typically takes 1-2 weeks.</p>
-                </details>
-                <details class="group bg-white rounded-2xl p-6 cursor-pointer shadow-sm open:shadow-md transition-all">
-                    <summary class="flex justify-between items-center font-bold text-brand-dark list-none">
-                        Do you offer antenatal care?
-                        <span class="transition group-open:rotate-180">
-                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <p class="text-gray-600 mt-4 text-sm leading-relaxed">Yes, we provide comprehensive antenatal care and delivery services for low and high-risk pregnancies.</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION (updated locations and phone numbers) -->
-    <section id="contact" class="py-32 bg-brand-dark relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16">
-                <div class="text-white">
-                    <span class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Contact Us</span>
-                    <h2 class="text-5xl font-serif mb-8">Begin your<br>consultation.</h2>
-                    <p class="text-gray-400 mb-12 text-lg font-light">
-                        Fill out the form to start a direct WhatsApp conversation with our clinic coordinator, or visit us at either location.
-                    </p>
+    <section id="contact" class="py-24 bg-brand-paper relative z-10">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="grid lg:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="text-5xl md:text-7xl font-serif text-brand-dark mb-12">Start the<br><span class="italic text-brand-accent">Dialogue.</span></h2>
                     
-                    <div class="space-y-8">
-                        <!-- Updated location: two addresses -->
-                        <div class="flex items-start gap-6">
-                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-brand-accent">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-serif">Our Locations</h4>
-                                <p class="text-gray-400 mt-2">Jambo Plaza, Parklands, Nairobi</p>
-                                <p class="text-gray-400">Aga Khan Drs Plaza, Room 230</p>
-                            </div>
+                    <div class="space-y-10">
+                        <div class="hover-float transition-transform duration-300">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-brand-muted block mb-3">Consulting Rooms</span>
+                            <p class="text-xl font-serif text-brand-slate">Jambo Plaza, Parklands, Nairobi</p>
+                            <p class="text-xl font-serif text-brand-slate opacity-70">Aga Khan Drs Plaza, Room 230</p>
                         </div>
-                        <!-- Updated phone numbers -->
-                        <div class="flex items-start gap-6">
-                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-brand-accent">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-serif">Clinic Numbers</h4>
-                                <p class="text-gray-400 mt-2">0726 958 498  /  0733 313 805</p>
-                                <p class="text-gray-400">info@drjameskamau.co.ke</p>
-                            </div>
+                        <div class="hover-float transition-transform duration-300">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-brand-muted block mb-3">Direct Line</span>
+                            <p class="text-2xl font-light text-brand-dark">0726 958 498 <span class="text-brand-accent mx-2">/</span> 0733 313 805</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white p-10 rounded-3xl shadow-2xl">
-                    <h3 class="text-2xl font-serif text-brand-dark mb-6">Request Appointment</h3>
-                    <form id="waForm" class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="text" id="fname" placeholder="First Name" required class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:outline-none focus:border-brand-primary transition-colors">
-                            <input type="text" id="lname" placeholder="Last Name" required class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:outline-none focus:border-brand-primary transition-colors">
+                <div class="bg-white p-10 md:p-14 shadow-2xl shadow-brand-dark/5 relative mt-12 lg:mt-0">
+                    <form id="waForm" class="space-y-8">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="group relative border-b border-brand-dark/10 py-2 focus-within:border-brand-accent transition-all">
+                                <label class="text-[9px] uppercase tracking-widest font-bold text-brand-muted block mb-1">First Name</label>
+                                <input type="text" id="fname" required class="w-full bg-transparent py-2 focus:outline-none text-brand-dark font-serif text-lg">
+                            </div>
+                            <div class="group relative border-b border-brand-dark/10 py-2 focus-within:border-brand-accent transition-all">
+                                <label class="text-[9px] uppercase tracking-widest font-bold text-brand-muted block mb-1">Surname</label>
+                                <input type="text" id="lname" required class="w-full bg-transparent py-2 focus:outline-none text-brand-dark font-serif text-lg">
+                            </div>
                         </div>
-                        <select id="service" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:outline-none focus:border-brand-primary transition-colors">
-                            <option value="General Inquiry">General Inquiry</option>
-                            <option value="Laparoscopy">Laparoscopy / Hysteroscopy</option>
-                            <option value="Gynecologic Surgery">Gynecologic Surgery</option>
-                            <option value="Obstetrics">Obstetrics / Antenatal Care</option>
-                        </select>
-                        <textarea id="message" rows="3" placeholder="Briefly describe your needs..." class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:outline-none focus:border-brand-primary transition-colors"></textarea>
                         
-                        <button type="submit" class="w-full bg-[#25D366] text-white font-bold py-4 rounded-lg hover:bg-[#20bd5a] transition-all flex items-center justify-center gap-3 shadow-lg">
-                            <span>Send via WhatsApp</span>
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        <div class="group relative border-b border-brand-dark/10 py-2 focus-within:border-brand-accent transition-all">
+                            <label class="text-[9px] uppercase tracking-widest font-bold text-brand-muted block mb-1">Inquiry Type</label>
+                            <div class="relative">
+                                <select id="service" class="w-full bg-transparent py-2 focus:outline-none text-brand-dark font-serif text-lg appearance-none cursor-pointer">
+                                    <option>Laparoscopy Consultation</option>
+                                    <option>Obstetrics Care</option>
+                                    <option>Hysteroscopy</option>
+                                    <option>General Gynecology</option>
+                                </select>
+                                <svg class="w-4 h-4 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-6 bg-brand-dark text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-brand-accent hover:text-brand-dark transition-all duration-500 shadow-xl mt-4">
+                            Request Appointment via WhatsApp
                         </button>
                     </form>
                 </div>
@@ -493,162 +346,176 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#020d12] text-white pt-20 pb-8 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center">
-            <div class="text-center md:text-left mb-8 md:mb-0">
-                <h2 class="font-serif text-2xl font-bold">Dr. W.J. Kamau</h2>
-                <p class="text-xs text-gray-500 uppercase tracking-widest mt-2">Consultant Gynecologist</p>
-            </div>
-            <div class="flex flex-col items-center md:items-end">
-                <p class="text-xs text-gray-600 mb-2">© 2026 All Rights Reserved.</p>
-                <div class="text-sm text-gray-400">
-                    Made by <span class="creator-tag font-bold text-white">Dw33pY</span>
-                </div>
-            </div>
+    <footer class="bg-[#020608] text-white py-12 border-t border-white/5 relative z-10">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center opacity-60">
+            <p class="text-[10px] uppercase tracking-widest mb-4 md:mb-0">© 2026 Dr. W.J. Kamau — Clinical Excellence</p>
+            <p class="text-[10px] uppercase tracking-widest">
+                Digital Presence by <span class="bg-gradient-to-r from-brand-accent to-white bg-clip-text text-transparent font-extrabold cursor-pointer hover:opacity-80 transition-opacity">Dw33pY</span>
+            </p>
         </div>
     </footer>
 
     <script>
+        // 1. LOADER LOGIC
         window.addEventListener("load", () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader-wrapper');
-                gsap.to(loader, {
-                    yPercent: -100,
-                    duration: 1,
-                    ease: "power4.inOut",
-                    onComplete: () => loader.style.display = 'none'
-                });
-                
-                gsap.from(".gsap-fade-up", {
-                    y: 60,
-                    opacity: 0,
-                    duration: 1.2,
-                    stagger: 0.15,
-                    ease: "power3.out",
-                    delay: 0.5
-                });
-            }, 3000);
+            const bar = document.getElementById('loader-bar');
+            const wrapper = document.getElementById('loader-wrapper');
+            let width = 0;
+            
+            const interval = setInterval(() => {
+                width += 2;
+                bar.style.width = width + "%";
+                if(width >= 100) {
+                    clearInterval(interval);
+                    
+                    // Reveal Animation
+                    gsap.to(wrapper, {
+                        yPercent: -100,
+                        duration: 1.2,
+                        ease: "power4.inOut",
+                        onComplete: initHeroAnimations
+                    });
+                }
+            }, 10);
         });
 
+        // 2. HERO ANIMATIONS
+        function initHeroAnimations() {
+            const tl = gsap.timeline();
+            
+            tl.to(".hero-text", {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+            
+            // Subtle Scale on Bg Image
+            gsap.to("#hero-img", {
+                scale: 1,
+                duration: 2.5,
+                ease: "power2.out"
+            });
+        }
+
+        // 3. SCROLL REVEALS
+        gsap.registerPlugin(ScrollTrigger);
+        
+        const revealElements = document.querySelectorAll(".gs-reveal");
+        revealElements.forEach(el => {
+            gsap.fromTo(el, 
+                { y: 50, opacity: 0 },
+                {
+                    y: 0, 
+                    opacity: 1, 
+                    duration: 1, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%"
+                    }
+                }
+            );
+        });
+
+        // 4. NAVBAR & PARALLAX LOGIC
+        const navbar = document.getElementById('navbar');
+        const navText = document.getElementById('nav-text');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        window.addEventListener('scroll', () => {
+            // Nav Transition
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                navText.classList.remove('text-white');
+                navText.classList.add('text-brand-dark');
+                navItems.forEach(i => {
+                    i.classList.remove('text-white');
+                    i.classList.add('text-brand-dark');
+                });
+            } else {
+                navbar.classList.remove('scrolled');
+                navText.classList.add('text-white');
+                navText.classList.remove('text-brand-dark');
+                navItems.forEach(i => {
+                    i.classList.add('text-white');
+                    i.classList.remove('text-brand-dark');
+                });
+            }
+
+            // Parallax Hero
+            const scrolled = window.scrollY;
+            const heroImg = document.getElementById('hero-img');
+            if(scrolled < window.innerHeight) {
+                heroImg.style.transform = `translateY(${scrolled * 0.4}px) scale(${1 + scrolled * 0.0005})`;
+            }
+
+            // Back To Top Visibility
+            const btn = document.getElementById('backToTop');
+            if(window.scrollY > 800) {
+                btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+            }
+        });
+
+        // 5. MOBILE MENU
+        const openBtn = document.getElementById('openMenu');
+        const closeBtn = document.getElementById('closeMenu');
+        const fullMenu = document.getElementById('fullMenu');
+        
+        function openMenu() {
+            fullMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMenu() {
+            fullMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        openBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+
+        // 6. WHATSAPP FORM
+        document.getElementById('waForm').onsubmit = (e) => {
+            e.preventDefault();
+            const fname = document.getElementById('fname').value;
+            const lname = document.getElementById('lname').value;
+            const service = document.getElementById('service').value;
+            
+            const message = `*Website Appointment Request*%0A%0A*Name:* ${fname} ${lname}%0A*Interest:* ${service}%0A*Status:* Seeking consultation`;
+            
+            window.open(`https://wa.me/254726958498?text=${message}`, '_blank');
+        };
+
+        // 7. SMOOTH SCROLL (Lenis)
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
             smooth: true
         });
+
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
 
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.utils.toArray('.parallax-img').forEach(img => {
-            gsap.to(img, {
-                yPercent: 20,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: img.parentElement,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                }
+        // Connect Lenis to Back to Top
+        document.getElementById('backToTop').onclick = () => lenis.scrollTo(0);
+        
+        // Connect Lenis to Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) lenis.scrollTo(target);
             });
         });
 
-        gsap.utils.toArray('.reveal-text').forEach(el => {
-            gsap.from(el, {
-                scrollTrigger: { trigger: el, start: "top 85%" },
-                y: 40,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-        });
-
-        gsap.from(".reveal-line", {
-            scrollTrigger: { trigger: ".reveal-line", start: "top 85%" },
-            width: 0,
-            duration: 1.5,
-            ease: "power3.out"
-        });
-
-        // WhatsApp form (updated to use first clinic number)
-        document.getElementById('waForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const fname = document.getElementById('fname').value;
-            const lname = document.getElementById('lname').value;
-            const service = document.getElementById('service').value;
-            const message = document.getElementById('message').value;
-            
-            const text = `*New Appointment Request*%0A%0A*Name:* ${fname} ${lname}%0A*Service:* ${service}%0A*Note:* ${message}`;
-            
-            window.open(`https://wa.me/254726958498?text=${text}`, '_blank');
-        });
-
-        // Mobile menu
-        const menuBtn = document.querySelector('.open-menu');
-        const closeBtn = document.querySelector('.close-menu');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const overlay = document.getElementById('menuOverlay');
-        const backToTop = document.getElementById('backToTop');
-
-        function toggleMenu() {
-            mobileMenu.classList.toggle('open');
-            overlay.classList.toggle('hidden');
-        }
-
-        menuBtn.addEventListener('click', toggleMenu);
-        closeBtn.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
-        document.querySelectorAll('#mobileMenu a').forEach(l => l.addEventListener('click', toggleMenu));
-
-        // Active section highlighting
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        function setActiveLink() {
-            let scrollPosition = window.scrollY + 150;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                const sectionId = section.getAttribute('id');
-
-                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                    mobileLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }
-
-        window.addEventListener('scroll', setActiveLink);
-        window.addEventListener('load', setActiveLink);
-
-        window.addEventListener('scroll', () => {
-            if(window.scrollY > 500) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            lenis.scrollTo(0);
-        });
     </script>
 </body>
 </html>
